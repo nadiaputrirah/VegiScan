@@ -47,10 +47,11 @@ const UploadPopup = ({ isOpen, onClose, uploaded }) => {
 
     try {
       const response = await fetch(
-        "https://javascript-backend-623812248472.asia-southeast2.run.app/predict",
+        "https://test-backend-javascript-623812248472.asia-southeast2.run.app/predict",
         {
           method: "POST",
           body: formData,
+          "Access-Control-Allow-Origin": "*"
         }
       );
 
@@ -61,12 +62,11 @@ const UploadPopup = ({ isOpen, onClose, uploaded }) => {
       const result = await response.json();
       console.log("Image uploaded successfully:", result);
       alert("Image uploaded successfully!");
-      setLink(result.data.link);
-      setLabel(result.data.label);
       onClose({
         label: result.data.label,
         link: result.data.link,
-        details: result.data.details
+        description: result.data.description,
+        recipe: result.data.recipe
       }); // Close the popup after submission
 
     

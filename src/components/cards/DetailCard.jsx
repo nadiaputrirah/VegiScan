@@ -1,6 +1,7 @@
 import React from "react";
-
-const DetailCard = ({ name, image, details, onClose }) => {
+import ReactMarkdown from "react-markdown";
+// import "../../style.css"
+const DetailCard = ({ name, image, description, recipe, onClose }) => {
   if (!name) return null;
 
   return (
@@ -19,10 +20,13 @@ const DetailCard = ({ name, image, details, onClose }) => {
         alt={name}
         className="w-full max-w-3xl h-64 object-cover rounded-lg mb-6"
       />
-
+      
       {/* Nama dan detail */}
       <h2 className="text-4xl font-bold mb-4 text-center">{name}</h2>
-      <p className="text-lg text-gray-700 max-w-3xl text-center">{details}</p>
+      <div className="text-2xl mb-4 text-justify" dangerouslySetInnerHTML={{ __html: description.slice(7).slice(0, -4) }} />
+
+      <h3 className="text-4xl font-bold mb-4 text-center"> Simple Recipe </h3>
+      <div className="text-2xl mb-4 text-justify" dangerouslySetInnerHTML={{ __html: recipe.slice(7).slice(0, -4) }} />
     </div>
   );
 };

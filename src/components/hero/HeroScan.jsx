@@ -22,7 +22,7 @@ const HeroScan = () => {
 
   return (
     <section className="bg-white">
-      {data ? (<DetailCard image={data.link} name={data.label} details={data.details} onClose={() => setData(null)}/>) : (<><div className="max-w-screen-xl mx-auto grid py-8 lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 px-4 md:px-6">
+      {data ? (<DetailCard image={data.link} name={data.label} description={data.description} recipe={data.recipe} onClose={() => setData(null)}/>) : (<><div className="max-w-screen-xl mx-auto grid py-8 lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 px-4 md:px-6">
             <div className="place-self-center lg:col-span-7">
               <h1 className="max-w-2xl mb-4 text-2xl text-textDark font-extrabold eading-loose text-left md:text-5xl xl:text-5xl">
                 Smart Scanning for Better Vegetable Quality and Insights
