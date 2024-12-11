@@ -100,10 +100,10 @@ const Vegetables = () => {
         <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
           <div className="mb-8 lg:mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold text-textDark">
-              All About Vegetables for Freshness and Quality
+              All About Vegetables <br /> for Freshness and Quality
             </h2>
             <p className="text-textDark sm:text-xl">
-              Explore our vegetable collection for detailed information about quality, benefits, and more.
+              Dive into detailed information about each vegetable—its quality, benefits, and how <br /> to make the most of it in your meals.
             </p>
           </div>
 

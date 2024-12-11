@@ -31,40 +31,47 @@ const WhyChoose = () => {
               </p>
             </div>
           </div>
-
-          {/* Repeat Card Items */}
-          {[...Array(3)].map((_, index) => (
-            <div
-              key={index}
-              className="flex items-start p-4 rounded-lg hover:shadow-smooth"
-            >
-              <div className="flex-shrink-0">
-                <img
-                  src="https://via.placeholder.com/50"
-                  alt="Icon"
-                  className="w-12 h-12"
-                />
-              </div>
-              <div className="ml-4">
-                <h3 className="font-bold text-lg textDark">
-                  Lorem ipsum dolor sit amet consectetur
-                </h3>
-                <p className="textDark text-sm">
-                  Lorem ipsum dolor sit amet consectetur. Sed eros lorem ut sit
-                  consectetur tellus aliquet.
-                </p>
-              </div>
+          <div className="flex items-start p-4 rounded-lg hover:shadow-smooth">
+            <div className="flex-shrink-0">
+              <img
+                src="https://via.placeholder.com/50"
+                alt="Icon"
+                className="w-12 h-12"
+              />
             </div>
-          ))}
+            <div className="ml-4">
+              <h3 className="font-bold text-lg textDark">
+                Smart Recipe Recommendations
+              </h3>
+              <p className="text-textDark text-sm">
+                Connects vegetable diagnosis with tailored recipe suggestions, enhancing meal planning and reducing ingredient waste.
+                </p>
+            </div>
+          </div>
+          <div className="flex items-start p-4 rounded-lg hover:shadow-smooth">
+            <div className="flex-shrink-0">
+              <img
+                src="https://via.placeholder.com/50"
+                alt="Icon"
+                className="w-12 h-12"
+              />
+            </div>
+            <div className="ml-4">
+              <h3 className="font-bold text-lg textDark">
+                Reduce Food Waste
+              </h3>
+              <p className="text-textDark text-sm">
+              VegiScan empowers consumers with knowledge about vegetable freshness and ripeness, reducing unnecessary waste.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* Right Image */}
       <div className="w-full md:w-1/2 flex justify-center">
         <img
           src={ChooseImg}
           alt="Vegetable Image"
-          className="rounded-lg max-w-lg"
+          className="rounded-lg max-w-lg md:max-w-xl"
         />
       </div>
     </section>

@@ -65,7 +65,7 @@ const UploadPopup = ({ isOpen, onClose }) => {
 
     try {
       const response = await fetch(
-        "https://javascript-backend-623812248472.asia-southeast2.run.app/predict",
+        "https://test-backend-javascript-623812248472.asia-southeast2.run.app/predict",
         {
           method: "POST",
           body: formData,
@@ -76,7 +76,12 @@ const UploadPopup = ({ isOpen, onClose }) => {
 
       const result = await response.json();
       setNotification({ message: "Successfully submitted!", type: "success" });
-      onClose({ label: result.data.label, link: result.data.link, details: result.data.details });
+      onClose({ 
+        label: result.data.label,
+        link: result.data.link,
+        description: result.data.description,
+        recipe: result.data.recipe
+      });
     } catch (error) {
       setNotification({
         message: "Error uploading image. Please try again.",
