@@ -8,7 +8,7 @@ const HowItWorks = () => {
         <img
           src={HowItWorkImg}
           alt="Vegetable Image"
-          className="rounded-lg max-w-xl"
+          className="rounded-lg max-w-full md:max-w-xl"
         />
       </div>
       <div className="w-full md:w-1/2">
@@ -18,7 +18,7 @@ const HowItWorks = () => {
         </h2>
         
         <div className="flex flex-col gap-4">
-          <div className="flex items-start p-4 rounded-lg hover:shadow-smooth">
+          <div className="flex items-start p-4 rounded-lg hover:shadow-lg transition-shadow">
             <div className="flex-shrink-0">
               <img
                 src="https://via.placeholder.com/50"
@@ -27,36 +27,42 @@ const HowItWorks = () => {
               />
             </div>
             <div className="ml-4">
-              <h3 className="font-bold text-lg textDark">Scan your vegetables or crops</h3>
+              <h3 className="font-bold text-lg text-textDark">Scan your vegetables or crops</h3>
               <p className="text-textDark text-sm">
-                Lorem ipsum dolor sit amet consectetur. Sed eros lorem ut sit
-                consectetur tellus aliquet.
+                Using VegiScan, scan your vegetables to automatically detect their quality and identify health issues.
               </p>
             </div>
           </div>
-
-          {/* Ulang Card Items */}
-          {[...Array(3)].map((_, index) => (
-            <div
-              key={index}
-              className="flex items-start p-4 rounded-lg hover:shadow-smooth"
-            >
-              <div className="flex-shrink-0">
-                <img
-                  src="https://via.placeholder.com/50"
-                  alt="Icon"
-                  className="w-12 h-12"
-                />
-              </div>
-              <div className="ml-4">
-                <h3 className="font-bold text-lg textDark">Lorem ipsum dolor sit amet consectetur</h3>
-                <p className="textDark text-sm">
-                  Lorem ipsum dolor sit amet consectetur. Sed eros lorem ut sit
-                  consectetur tellus aliquet.
-                </p>
-              </div>
+          <div className="flex items-start p-4 rounded-lg hover:shadow-lg transition-shadow">
+            <div className="flex-shrink-0">
+              <img
+                src="https://via.placeholder.com/50"
+                alt="Icon"
+                className="w-12 h-12"
+              />
             </div>
-          ))}
+            <div className="ml-4">
+              <h3 className="font-bold text-lg text-textDark">Diagnose Vegetable Quality</h3>
+              <p className="text-textDark text-sm">
+                Leverage AI-powered image classification to evaluate ripeness and freshness for optimal consumption.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-start p-4 rounded-lg hover:shadow-lg transition-shadow">
+            <div className="flex-shrink-0">
+              <img
+                src="https://via.placeholder.com/50"
+                alt="Icon"
+                className="w-12 h-12"
+              />
+            </div>
+            <div className="ml-4">
+              <h3 className="font-bold text-lg text-textDark">Get Tailored Recipe Recommendations</h3>
+              <p className="text-textDark text-sm">
+                Receive personalized recipes based on the scanned vegetable's quality and available ingredients.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

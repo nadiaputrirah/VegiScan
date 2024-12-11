@@ -1,47 +1,65 @@
 import React, { useState } from "react";
-import Vegetables from "../../Pages/VegetablesPage";
 
-const UploadPopup = ({ isOpen, onClose, uploaded }) => {
+const UploadPopup = ({ isOpen, onClose }) => {
   const [image, setImage] = useState(null);
-  const [file, setFile] = useState(null);  // For the actual file to upload
+  const [file, setFile] = useState(null);
+  const [notification, setNotification] = useState({ message: "", type: "" });
+  const [isUploading, setIsUploading] = useState(false);
 
-  const [link, setLink] = useState(null);
-  const [label, setLabel] = useState(null);
   const handleFileChange = (event) => {
     const uploadedFile = event.target.files[0];
     if (uploadedFile && uploadedFile.type.startsWith("image/")) {
       const reader = new FileReader();
-      reader.onload = (e) => {
-        setImage(e.target.result); // Set preview URL
-      };
-      setFile(uploadedFile); // Save file for later upload
+      reader.onload = (e) => setImage(e.target.result);
+      setFile(uploadedFile);
       reader.readAsDataURL(uploadedFile);
+
+      // Hapus notifikasi error jika file valid
+      setNotification({ message: "", type: "" });
+    } else {
+      setNotification({
+        message: "Invalid file type. Please upload an image.",
+        type: "error",
+      });
     }
   };
 
-  const handleDragOver = (event) => {
-    event.preventDefault();
-  };
+  const handleDragOver = (event) => event.preventDefault();
 
   const handleDrop = (event) => {
     event.preventDefault();
     const uploadedFile = event.dataTransfer.files[0];
     if (uploadedFile && uploadedFile.type.startsWith("image/")) {
       const reader = new FileReader();
-      reader.onload = (e) => {
-        setImage(e.target.result); // Set preview URL
-      };
-      setFile(uploadedFile); // Save file for later upload
+      reader.onload = (e) => setImage(e.target.result);
+      setFile(uploadedFile);
       reader.readAsDataURL(uploadedFile);
+
+      // Hapus notifikasi error jika file valid
+      setNotification({ message: "", type: "" });
+    } else {
+      setNotification({
+        message: "Invalid file type. Please upload an image.",
+        type: "error",
+      });
     }
+  };
+
+  const handleCancelUpload = () => {
+    setImage(null);
+    setFile(null);
   };
 
   const handleSubmit = async () => {
     if (!file) {
-      alert("Please upload an image before submitting.");
+      setNotification({
+        message: "Woops! You haven't uploaded an image yet.",
+        type: "error",
+      });
       return;
     }
 
+    setIsUploading(true);
     const formData = new FormData();
     formData.append("image", file, file.name);
 
@@ -51,72 +69,97 @@ const UploadPopup = ({ isOpen, onClose, uploaded }) => {
         {
           method: "POST",
           body: formData,
-          "Access-Control-Allow-Origin": "*"
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Failed to upload image");
-      }
+      if (!response.ok) throw new Error("Failed to upload image");
 
       const result = await response.json();
-      console.log("Image uploaded successfully:", result);
-      alert("Image uploaded successfully!");
-      onClose({
+      setNotification({ message: "Successfully submitted!", type: "success" });
+      onClose({ 
         label: result.data.label,
         link: result.data.link,
         description: result.data.description,
         recipe: result.data.recipe
-      }); // Close the popup after submission
-
-    
+      });
     } catch (error) {
-      console.error("Error uploading image:", error);
-      alert("Error uploading image.");
+      setNotification({
+        message: "Error uploading image. Please try again.",
+        type: "error",
+      });
+    } finally {
+      setIsUploading(false);
     }
-
-    
   };
 
   if (!isOpen) return null;
 
-
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white rounded-lg shadow-lg p-10 max-w-4xl w-full">
+    <div>
+      {/* Notifikasi */}
+      {notification.message && (
         <div
-          className="mb-6 border-2 border-dashed rounded-lg p-10 text-center text-gray-500"
-          onDragOver={handleDragOver}
-          onDrop={handleDrop}
+          className={`fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-md text-white z-50 ${
+            notification.type === "error" ? "bg-red-500" : "bg-green-500"
+          }`}
         >
-          {image ? (
-            <img src={image} alt="Preview" className="max-h-64 mx-auto" />
-          ) : (
-            <>
-              <p className="text-md text-gray-600">Click to upload or drag and drop</p>
-              <p className="text-sm text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-              <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                id="fileUpload"
-                onChange={handleFileChange}
-              />
+          {notification.message}
+        </div>
+      )}
+
+      {/* Popup */}
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40">
+        <div className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full relative">
+          <button
+            className="absolute top-4 right-4 text-gray-400 hover:text-black"
+            onClick={() => onClose(null)}
+          >
+            ✕
+          </button>
+          <div
+            className="mb-4 border-2 border-dashed rounded-lg p-6 text-center transition-all"
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+          >
+            {image ? (
+              <img src={image} alt="Preview" className="max-h-40 mx-auto mb-2" />
+            ) : (
+              <p className="text-gray-500">Drag & Drop or Click to Upload</p>
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              id="fileUpload"
+              onChange={handleFileChange}
+            />
+            {!image && (
               <label
                 htmlFor="fileUpload"
                 className="cursor-pointer text-primary-500 underline"
               >
                 Browse files
               </label>
-            </>
+            )}
+          </div>
+          {image && (
+            <button
+              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 w-full mb-2"
+              onClick={handleCancelUpload}
+            >
+              Cancel Image
+            </button>
           )}
+          <button
+            className={`w-full bg-primary-500 text-white py-3 rounded-lg font-semibold ${
+              isUploading ? "opacity-50 cursor-not-allowed" : "hover:bg-primary-600"
+            }`}
+            onClick={handleSubmit}
+            disabled={isUploading}
+          >
+            {isUploading ? "Uploading..." : "Submit"}
+          </button>
         </div>
-        <button
-          className="w-full bg-primary-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-primary-600"
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
       </div>
     </div>
   );
