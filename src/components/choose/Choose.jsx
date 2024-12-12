@@ -1,5 +1,5 @@
 import React from "react";
-import ChooseImg from "../../assets/image/choose.png";
+import ChooseImg from "../../assets/image/img-choose.svg";
 import IconOne from "../../assets/image/iconChoose1.svg";
 import IconTwo from "../../assets/image/iconChoose2.svg";
 import IconThree from "../../assets/image/iconChoose3.svg";
@@ -74,7 +74,7 @@ const WhyChoose = () => {
         <img
           src={ChooseImg}
           alt="Vegetable Image"
-          className="rounded-lg max-w-lg md:max-w-xl"
+          className="rounded-lg max-w-lg md:max-w-sm"
         />
       </div>
     </section>
