@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import VegetablesCard from "../components/cards/VegetableCard";
 import DetailCard from "../components/cards/DetailCard";
 
-import bellpepperImg from "../assets/image/bellpepper.svg";
-import carrotImg from "../assets/image/carrots.svg";
-import cucumberImg from "../assets/image/cucumber.svg";
-import potatoImg from "../assets/image/potato.svg";
-import tomatoImg from "../assets/image/tomato.svg";
+import bellpepperImg from "../assets/image/bellpepper.png";
+import carrotImg from "../assets/image/carrots.png";
+import cucumberImg from "../assets/image/cucumber.png";
+import potatoImg from "../assets/image/potato.png";
+import tomatoImg from "../assets/image/tomato.png";
 const Vegetables = () => {
   const [selectedVegetable, setSelectedVegetable] = useState(null);
 

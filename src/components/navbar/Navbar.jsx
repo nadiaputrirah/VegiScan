@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <nav className="bg-white w-full mt-4">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <img src={LogoImg} alt="" className="w-40 h-20"/>
+        <img src={LogoImg} alt="" className="h-16"/>
 
         {/* Toggle Button */}
         <button

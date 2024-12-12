@@ -15,7 +15,7 @@ const HowItWorks = () => {
         />
       </div>
       <div className="w-full md:w-1/2">
-        <p className="text-secondary font-medium text-lg mb-2">How It Works ?</p>
+        <p className="text-primary-400 font-medium text-lg mb-2">How It Works ?</p>
         <h2 className="text-2xl md:text-3xl font-bold leading-snug mb-6">
           Smarter Veggie Care
         </h2>

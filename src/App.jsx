@@ -5,6 +5,7 @@ import Navbar from "./components/navbar/Navbar";
 import Vegetables from "./Pages/VegetablesPage";
 import HeroScan from "./components/hero/HeroScan";
 import Footer from "./components/footer/Footer";
+import HistoryPage from "./components/scan/History";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/vegetables" element={<Vegetables initial={null}/>} />
         <Route path="/scanpage" element={<HeroScan />} />
+        <Route path="/history" element={<HistoryPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

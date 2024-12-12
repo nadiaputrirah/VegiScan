@@ -94,7 +94,7 @@ const DetailScan = ({ name, image, description, recipe, onCloseTwo }) => {
         />
         <div className="flex justify-end">
           <button
-            className="w-full sm:w-auto bg-secondary text-white px-6 py-2 rounded-lg hover:bg-primary-600 transition disabled:opacity-50"
+            className="w-full sm:w-auto bg-primary-400 text-white px-6 py-2 rounded-lg hover:bg-primary-500 transition disabled:opacity-50"
             onClick={sendPrompt}
             disabled={loading}
           >

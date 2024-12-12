@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import ScanImage from "../../assets/image/scan.png";
 import UploadPopup from "../scan/Upload.jsx";
 import Vegetables from "../../Pages/VegetablesPage";
@@ -36,6 +38,11 @@ const HeroScan = () => {
                   className="inline-flex px-10 py-3 text-white text-md font-bold text-center rounded-lg bg-primary-400 hover:bg-primary-500"
                 >
                   Upload
+                </button>
+                <button
+                  className="inline-flex px-10 py-3 text-white text-md font-bold text-center rounded-lg bg-secondary-500 hover:bg-secondary-600"
+                >
+                  <Link to="/history">History</Link>
                 </button>
               </div>
             </div>
