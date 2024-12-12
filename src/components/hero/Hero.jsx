@@ -18,7 +18,7 @@ const Hero = () => {
                     <div className="flex flex-col sm:flex-row gap-4">
                         <Link
                             to="/vegetables"
-                            className="inline-flex items-center px-5 py-3 text-white font-medium text-center rounded-lg bg-primary-500 hover:bg-primary-600 transition-all duration-200"
+                            className="inline-flex items-center px-5 py-3 text-white font-medium text-center rounded-lg bg-primary-400 hover:bg-primary-500 transition-all duration-200"
                         >
                             Explore Now
                             <svg

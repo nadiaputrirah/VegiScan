@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const UploadPopup = ({ isOpen, onClose }) => {
+const UploadPopup = ({ isOpenTwo, onCloseTwo }) => {
   const [image, setImage] = useState(null);
   const [file, setFile] = useState(null);
   const [notification, setNotification] = useState({ message: "", type: "" });
@@ -14,7 +14,6 @@ const UploadPopup = ({ isOpen, onClose }) => {
       setFile(uploadedFile);
       reader.readAsDataURL(uploadedFile);
 
-      // Hapus notifikasi error jika file valid
       setNotification({ message: "", type: "" });
     } else {
       setNotification({
@@ -35,7 +34,6 @@ const UploadPopup = ({ isOpen, onClose }) => {
       setFile(uploadedFile);
       reader.readAsDataURL(uploadedFile);
 
-      // Hapus notifikasi error jika file valid
       setNotification({ message: "", type: "" });
     } else {
       setNotification({
@@ -76,11 +74,11 @@ const UploadPopup = ({ isOpen, onClose }) => {
 
       const result = await response.json();
       setNotification({ message: "Successfully submitted!", type: "success" });
-      onClose({ 
+      onCloseTwo({
         label: result.data.label,
         link: result.data.link,
         description: result.data.description,
-        recipe: result.data.recipe
+        recipe: result.data.recipe,
       });
     } catch (error) {
       setNotification({
@@ -92,11 +90,11 @@ const UploadPopup = ({ isOpen, onClose }) => {
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpenTwo) return null;
 
   return (
     <div>
-      {/* Notifikasi */}
+      {/* Notification */}
       {notification.message && (
         <div
           className={`fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-md text-white z-50 ${
@@ -108,11 +106,16 @@ const UploadPopup = ({ isOpen, onClose }) => {
       )}
 
       {/* Popup */}
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40">
+      <div
+        className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) onCloseTwo(null); // Close popup if clicked outside
+        }}
+      >
         <div className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full relative">
           <button
             className="absolute top-4 right-4 text-gray-400 hover:text-black"
-            onClick={() => onClose(null)}
+            onClick={() => onCloseTwo(null)}
           >
             ✕
           </button>
@@ -136,7 +139,7 @@ const UploadPopup = ({ isOpen, onClose }) => {
             {!image && (
               <label
                 htmlFor="fileUpload"
-                className="cursor-pointer text-primary-500 underline"
+                className="cursor-pointer text-secondary-500 underline"
               >
                 Browse files
               </label>

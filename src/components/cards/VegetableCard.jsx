@@ -9,7 +9,7 @@ const VegetablesCard = ({ name, image, description, onClick }) => {
           <p className="mb-3 font-normal text-textDark">{description}</p>
           <button
             onClick={onClick}
-            className="mt-4 bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600"
+            className="mt-4 bg-primary-400 text-white px-4 py-2 rounded-lg hover:bg-primary-500"
           >
             See More
           </button>

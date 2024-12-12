@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import LogoImg from "../../assets/image/vegiscan.svg";
 
 const Navbar = () => {
   // State to manage the toggle status
@@ -11,15 +12,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white border-gray-200 w-full mt-4">
+    <nav className="bg-white w-full mt-4">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        {/* Logo */}
-        <Link
-          to="/"
-          className="inline-block px-4 py-2 text-white bg-primary-500 rounded-lg shadow-md hover:bg-primary-600 focus:outline-none transition-all duration-200"
-        >
-          Logo
-        </Link>
+        <img src={LogoImg} alt="" className="w-40 h-20"/>
 
         {/* Toggle Button */}
         <button
@@ -71,7 +66,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/scanpage"
-                className="inline-block px-4 py-2 text-white bg-primary-500 rounded-lg shadow-md hover:bg-primary-600 focus:outline-none transition-all duration-200"
+                className="inline-block px-4 py-2 text-white bg-primary-400 rounded-lg shadow-md hover:bg-primary-400 focus:outline-none transition-all duration-200"
               >
                 Scan Now
               </Link>

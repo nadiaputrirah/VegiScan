@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ScanImage from "../../assets/image/scan.png";
-import UploadPopup from "../scan/Upload";
+import UploadPopup from "../scan/Upload.jsx";
 import Vegetables from "../../Pages/VegetablesPage";
-import DetailCard from "../cards/DetailCard"
+import DetailScan from "../scan/DetailScan.jsx";
 
 const HeroScan = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -22,7 +22,7 @@ const HeroScan = () => {
 
   return (
     <section className="bg-white">
-      {data ? (<DetailCard image={data.link} name={data.label} description={data.description} recipe={data.recipe} onClose={() => setData(null)}/>) : (<><div className="max-w-screen-xl mx-auto grid py-8 lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 px-4 md:px-6">
+      {data ? (<DetailScan image={data.link} name={data.label} description={data.description} recipe={data.recipe} onCloseTwo={() => setData(null)}/>) : (<><div className="max-w-screen-xl mx-auto grid py-8 lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 px-4 md:px-6">
             <div className="place-self-center lg:col-span-7">
               <h1 className="max-w-2xl mb-4 text-2xl text-textDark font-extrabold eading-loose text-left md:text-5xl xl:text-5xl">
                 Smart Scanning for Better Vegetable Quality and Insights
@@ -33,7 +33,7 @@ const HeroScan = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={handlePopupOpen}
-                  className="inline-flex px-10 py-3 text-white text-lg font-normal text-center rounded-lg bg-primary-500 hover:bg-primary-600"
+                  className="inline-flex px-10 py-3 text-white text-md font-bold text-center rounded-lg bg-primary-400 hover:bg-primary-500"
                 >
                   Upload
                 </button>
@@ -43,7 +43,7 @@ const HeroScan = () => {
               <img src={ScanImage} alt="Hero image" />
             </div>
           </div>
-          <UploadPopup isOpen={isPopupOpen} onClose={handlePopupClose} /></>)}
+          <UploadPopup isOpenTwo={isPopupOpen} onCloseTwo={handlePopupClose} /></>)}
           
     </section>
   );

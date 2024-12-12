@@ -1,5 +1,8 @@
 import React from "react";
 import HowItWorkImg from "../../assets/image/works.png";
+import IconOne from "../../assets/image/iconWork1.svg";
+import IconTwo from "../../assets/image/iconWork2.svg";
+import IconThree from "../../assets/image/iconWork3.svg";
 
 const HowItWorks = () => {
   return (
@@ -21,7 +24,7 @@ const HowItWorks = () => {
           <div className="flex items-start p-4 rounded-lg hover:shadow-lg transition-shadow">
             <div className="flex-shrink-0">
               <img
-                src="https://via.placeholder.com/50"
+                src={IconOne}
                 alt="Icon"
                 className="w-12 h-12"
               />
@@ -36,7 +39,7 @@ const HowItWorks = () => {
           <div className="flex items-start p-4 rounded-lg hover:shadow-lg transition-shadow">
             <div className="flex-shrink-0">
               <img
-                src="https://via.placeholder.com/50"
+                src={IconTwo}
                 alt="Icon"
                 className="w-12 h-12"
               />
@@ -51,7 +54,7 @@ const HowItWorks = () => {
           <div className="flex items-start p-4 rounded-lg hover:shadow-lg transition-shadow">
             <div className="flex-shrink-0">
               <img
-                src="https://via.placeholder.com/50"
+                src={IconThree}
                 alt="Icon"
                 className="w-12 h-12"
               />

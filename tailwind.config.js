@@ -8,10 +8,13 @@ export default {
     extend: {
       colors:{
         primary: {
+          400: '#639361',
+          500: '#4a7f4a',
+        },
+        secondary: {
           500: '#FFAD00',
           600: '#E28300',
         },
-        secondary: '#639361',
         textDark: '#333333',
       },
       boxShadow: {

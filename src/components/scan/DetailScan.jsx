@@ -1,57 +1,112 @@
 import React, { useState } from "react";
-import UploadPopup from "./UploadPopup"; // Pastikan path-nya benar
 
-const DetailScan = () => {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [scanDetails, setScanDetails] = useState(null); // Data hasil scan
+const DetailScan = ({ name, image, description, recipe, onCloseTwo }) => {
+  if (!name) return null;
 
-  const handleOpenPopup = () => {
-    setIsPopupOpen(true);
-  };
+  const [prompt, setPrompt] = useState("");
+  const [result, setResult] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleClosePopup = (result) => {
-    setIsPopupOpen(false);
-    if (result) {
-      setScanDetails(result); // Simpan data hasil scan
+  const sendPrompt = async () => {
+    if (!prompt.trim()) {
+      alert("Please enter a prompt!");
+      return;
+    }
+
+    setLoading(true);
+    const perintah = `You are only permitted to talk about ${name}. If they talk about something else, respond to them in about two sentences saying you are not understand about what are they talking politely. Now, Listen to the following prompt and explain it as usual: ${prompt}`;
+    try {
+      const response = await fetch(
+        "https://test-backend-javascript-623812248472.asia-southeast2.run.app/prompt",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ prompt: perintah }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setResult(data.data || "No result returned from API.");
+    } catch (error) {
+      setResult(`Error: ${error.message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Detail Scan</h1>
-      <button
-        className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
-        onClick={handleOpenPopup}
-      >
-        Upload Image
-      </button>
+    <div className="w-full max-w-screen-xl mx-auto sm:p-8 flex flex-col items-center">
+      {/* Tombol kembali */}
+      <div className="flex items-center w-full max-w-full mb-6">
+        <button
+          onClick={onCloseTwo}
+          className="flex items-center gap-2 px-4 py-2 bg-none text-secondary-500 text-lg"
+        >
+          <span className="text-lg">←</span> Back
+        </button>
+      </div>
 
-      {/* Tampilkan hasil scan jika ada */}
-      {scanDetails && (
-        <div className="mt-6 p-4 border rounded-lg bg-gray-100">
-          <h2 className="text-xl font-semibold mb-2">Hasil Scan</h2>
-          <p>
-            <strong>Label:</strong> {scanDetails.label}
-          </p>
-          <p>
-            <strong>Link:</strong>{" "}
-            <a
-              href={scanDetails.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 underline"
-            >
-              {scanDetails.link}
-            </a>
-          </p>
-          <p>
-            <strong>Details:</strong> {scanDetails.details}
-          </p>
+      {/* Card utama */}
+      <div className="w-full max-w-screen-xl rounded-lg p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Gambar */}
+        <div>
+          <img
+            src={image}
+            alt={name}
+            className="w-full h-80 object-cover rounded-md shadow-sm"
+          />
         </div>
-      )}
 
-      {/* Popup untuk upload gambar */}
-      <UploadPopup isOpen={isPopupOpen} onClose={handleClosePopup} />
+        {/* Deskripsi */}
+        <div>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-textDark text-center lg:text-left">
+            {name}
+          </h2>
+          <div
+            className="text-base sm:text-lg text-textDark mb-6 text-justify"
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
+          <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-textDark text-center lg:text-left">
+            Simple Recipe
+          </h3>
+          <div
+            className="text-base sm:text-lg text-textDark text-justify"
+            dangerouslySetInnerHTML={{ __html: recipe }}
+          />
+        </div>
+      </div>
+
+      {/* Prompt form */}
+      <div className="w-full max-w-screen-xl p-6 sm:p-8 mt-8">
+        <h3 className="text-2xl font-bold mb-4 text-textDark">Have Any Questions?</h3>
+        <textarea
+          className="w-full p-3 border rounded-lg mb-4 focus:outline-none"
+          placeholder="Enter your prompt here..."
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          disabled={loading}
+        />
+        <div className="flex justify-end">
+          <button
+            className="w-full sm:w-auto bg-secondary text-white px-6 py-2 rounded-lg hover:bg-primary-600 transition disabled:opacity-50"
+            onClick={sendPrompt}
+            disabled={loading}
+          >
+            {loading ? "Sending..." : "Send"}
+          </button>
+        </div>
+        <textarea
+          className="w-full p-3 border rounded-lg mt-4 focus:ring-2 focus:ring-primary-500 focus:outline-none"
+          value={result}
+          readOnly
+        />
+      </div>
     </div>
   );
 };

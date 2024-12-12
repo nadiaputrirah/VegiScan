@@ -1,5 +1,8 @@
 import React from "react";
 import ChooseImg from "../../assets/image/choose.png";
+import IconOne from "../../assets/image/iconChoose1.svg";
+import IconTwo from "../../assets/image/iconChoose2.svg";
+import IconThree from "../../assets/image/iconChoose3.svg";
 
 const WhyChoose = () => {
   return (
@@ -16,7 +19,7 @@ const WhyChoose = () => {
           <div className="flex items-start p-4 rounded-lg hover:shadow-smooth">
             <div className="flex-shrink-0">
               <img
-                src="https://via.placeholder.com/50"
+                src={IconOne}
                 alt="Icon"
                 className="w-12 h-12"
               />
@@ -34,7 +37,7 @@ const WhyChoose = () => {
           <div className="flex items-start p-4 rounded-lg hover:shadow-smooth">
             <div className="flex-shrink-0">
               <img
-                src="https://via.placeholder.com/50"
+                src={IconTwo}
                 alt="Icon"
                 className="w-12 h-12"
               />
@@ -51,7 +54,7 @@ const WhyChoose = () => {
           <div className="flex items-start p-4 rounded-lg hover:shadow-smooth">
             <div className="flex-shrink-0">
               <img
-                src="https://via.placeholder.com/50"
+                src={IconThree}
                 alt="Icon"
                 className="w-12 h-12"
               />
